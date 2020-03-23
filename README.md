@@ -1,2 +1,2 @@
 # darjeeling
-customizable management portal generator
+何をするかは未定
