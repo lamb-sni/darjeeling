@@ -1,2 +1,13 @@
 # darjeeling
-FF14の有志が作ってるAPIを使ってなにかしようかと思ってたけど作りたかった機能が5.3で実装されちゃった
+darjeelingプロジェクトへようこそ。
+
+## Setup
+```
+cd app
+yarn
+```
+
+## Start
+```
+yarn start
+```
