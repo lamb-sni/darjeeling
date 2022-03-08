@@ -15,11 +15,21 @@
     "react-scripts": "3.4.1",
     "typescript": "~3.7.2"
   },
+  "homepage": "./",
+  "main": "build/electron/main.js",
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "electron-builder install-app-deps",
+    "wait-start": "wait-on http://localhost:3000",
+    "start": "concurrently \"npm run start:start-server\" \"npm run start:watch-electron\" \"npm run start:use-electron\"",
+    "start:start-server": "cross-env BROWSER=none react-scripts start",
+    "start:watch-electron": "run-s wait-start start:watch-electron:watch",
+    "start:watch-electron:watch": "tsc -p electron -w",
+    "start:use-electron": "run-s wait-start start:use-electron:build start:use-electron:run",
+    "start:use-electron:build": "tsc -p electron",
+    "start:use-electron:run": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +45,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^17.1.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-store": "^8.0.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "wait-on": "^6.0.1"
   }
 }
